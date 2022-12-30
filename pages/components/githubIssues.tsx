@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 import fetcher from '../api/github'
-import useSWR from 'swr'
+//import useSWR from 'swr'
 //import fetcher from '../../lib/fetcher'
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Box } from '@mui/material';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Issues = () => {
+
   //const {data, error} = useSWR('api/github', fetcher)
-  //console.log(3)
-  
-
-
     //const issues = data?.issues
-    //console.log(4)
-  //console.log(issues)
+
+
   const issues = fetcher("a", "b")
     const [hasMore, setHasMore] = useState(true);
-    const [displayedIssues, setIssues] = useState(issues.slice(0, 25))//issues.slice(0, 25));
-    //console.log(issues);
+    const [displayedIssues, setIssues] = useState(issues.slice(0, 25))   
     
-   //const displayedIssues:{userId:number, userAvatar:string,issueId:number, userName:string, issueBody:string}[] = {}[]
-
 
     return (
       <div>
