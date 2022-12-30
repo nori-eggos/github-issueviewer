@@ -22,7 +22,7 @@ export default function Home() {
   let submit = false;
   const handleSubmit = () => {
     setOrganisation({ text: organisation.tempText, tempText: organisation.text });
-    setRepo({ text: repo.tempText, tempText: repo.text });
+    setRepo({ text: repository.tempText, tempText: repository.text });
     submit = true;
   };
   return (
@@ -43,10 +43,10 @@ export default function Home() {
           id="standard-helperText"
           label="repo"
           required
-          error={isValid(repo.text)}
-          helperText={isValid(repo.text) ? helperText : ""}
+          error={isValid(repository.text)}
+          helperText={isValid(repository.text) ? helperText : ""}
           onChange={(event) =>
-            setOrganisation({ text: repo.text, tempText: event.target.value })
+            setOrganisation({ text: repository.text, tempText: event.target.value })
           }
         />
         <Button
