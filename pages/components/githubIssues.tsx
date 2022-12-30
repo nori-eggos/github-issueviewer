@@ -5,13 +5,13 @@ import fetcher from '../api/github'
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Box } from '@mui/material';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const Issues = () => {
+export default function Issues({name, repo}:{name: string, repo:string}) {
 
   //const {data, error} = useSWR('api/github', fetcher)
     //const issues = data?.issues
 
 
-  const issues = fetcher("a", "b")
+  const issues = fetcher(name, repo)
     const [hasMore, setHasMore] = useState(true);
     const [displayedIssues, setIssues] = useState(issues.slice(0, 25))   
     
@@ -45,7 +45,5 @@ const Issues = () => {
   </div>
     )
 }
-
-export default Issues
 
 

@@ -11,15 +11,19 @@ function Header({ title } : {title: string}) {
 
   /**
    * IMPORTANT NOTE
-   * ALL Commented Code is from the first metod to fetch with SWR and lib/fetcher
+   * ALL Commented Code is from the first metod to fetch with SWR and lib/fetcher (not finished)
    */
 
 export default function Home() {
-  const [validate, setValid] = useState({ text: "default", tempText: "" });
+  const helperText = "suggestion is too short"
+  const [organisation, setOrganisation] = useState({ text: "default", tempText: "" });
+  const [repository, setRepo] = useState({ text: "default", tempText: "" });
   const isValid = (text:string) => text.length < 2;
-  const gitHubIssues: {author:string}[] = [{author: ""}];
+  let submit = false;
   const handleSubmit = () => {
-    setValid({ text: validate.tempText, tempText: validate.text });
+    setOrganisation({ text: organisation.tempText, tempText: organisation.text });
+    setRepo({ text: repo.tempText, tempText: repo.text });
+    submit = true;
   };
   return (
     <div>
@@ -27,12 +31,22 @@ export default function Home() {
       <div>
         <TextField
           id="standard-helperText"
-          label="organisation/repo"
+          label="organisation"
           required
-          error={isValid(validate.text)}
-          helperText={isValid(validate.text) ? "suggestion is too short" : ""}
+          error={isValid(organisation.text)}
+          helperText={isValid(organisation.text) ? helperText : ""}
           onChange={(event) =>
-            setValid({ text: "default", tempText: event.target.value })
+            setOrganisation({ text: organisation.text, tempText: event.target.value })
+          }
+        />
+        <TextField
+          id="standard-helperText"
+          label="repo"
+          required
+          error={isValid(repo.text)}
+          helperText={isValid(repo.text) ? helperText : ""}
+          onChange={(event) =>
+            setOrganisation({ text: repo.text, tempText: event.target.value })
           }
         />
         <Button
@@ -44,9 +58,10 @@ export default function Home() {
           Submit
         </Button>
       </div>
-      
-
-      <Issues />
+      {
+        submit ? <Issues name={organisation.text} repo={repository.text}/>
+        : ""
+      }
     </div>
   );
 }
