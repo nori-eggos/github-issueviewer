@@ -19,11 +19,12 @@ export default function Home() {
   const [organisation, setOrganisation] = useState({ text: "default", tempText: "" });
   const [repository, setRepo] = useState({ text: "default", tempText: "" });
   const isValid = (text:string) => text.length < 2;
-  let submit = false;
+  let issues;
   const handleSubmit = () => {
+    issues = <Issues name={organisation.text} repo={repository.text}/>
+    
     setOrganisation({ text: organisation.tempText, tempText: organisation.text });
     setRepo({ text: repository.tempText, tempText: repository.text });
-    submit = true;
   };
   return (
     <div>
@@ -46,7 +47,7 @@ export default function Home() {
           error={isValid(repository.text)}
           helperText={isValid(repository.text) ? helperText : ""}
           onChange={(event) =>
-            setOrganisation({ text: repository.text, tempText: event.target.value })
+            setRepo({ text: repository.text, tempText: event.target.value })
           }
         />
         <Button
@@ -58,10 +59,7 @@ export default function Home() {
           Submit
         </Button>
       </div>
-      {
-        submit ? <Issues name={organisation.text} repo={repository.text}/>
-        : ""
-      }
+            {issues}
     </div>
   );
 }

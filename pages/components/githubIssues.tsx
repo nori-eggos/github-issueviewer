@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import fetcher from '../api/github'
+import fetchIssues from '../api/github'
 //import useSWR from 'swr'
 //import fetcher from '../../lib/fetcher'
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Box } from '@mui/material';
@@ -11,7 +11,7 @@ export default function Issues({name, repo}:{name: string, repo:string}) {
     //const issues = data?.issues
 
 
-  const issues = fetcher(name, repo)
+  const issues = fetchIssues(name, repo)
     const [hasMore, setHasMore] = useState(true);
     const [displayedIssues, setIssues] = useState(issues.slice(0, 25))   
     
@@ -32,11 +32,11 @@ export default function Issues({name, repo}:{name: string, repo:string}) {
           <ListItem disablePadding>
             <ListItemAvatar>
                 <Avatar
-                  alt={`Avatar n°${displayedIssues.user.id}`}
-                  src={displayedIssues.user.avatar_url}
+                  alt={`Avatar n°${issue.user.id}`}
+                  src={issue.user.avatar_url}
                 />
               </ListItemAvatar>
-        <ListItemText primary={displayedIssues.number} secondary={displayedIssues.user.login} />
+        <ListItemText primary={issue.number} secondary={issue.user.login} />
           </ListItem>
             ))}
           </List>

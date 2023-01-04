@@ -12,8 +12,6 @@ import { useState } from "react";
   const response = await fetch(url, {"headers": header});
   const json = response.json();
 
-
-  console.log(1)
   return res.status(200).json({
     json
   })
